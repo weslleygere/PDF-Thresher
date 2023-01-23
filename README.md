@@ -1,2 +1,2 @@
 # PDF-Thresher
-Powerful tool for extracting valuable data from PDFs using AI and NLP. Extracts text, tables, charts, images. Ideal for research and analysis."
+"PDF Thresher is a powerful tool for extracting and separating valuable information from PDF files. It uses advanced techniques in AI and NLP to extract text, tables, charts, images and other relevant data from any PDF document. Making it easy and quick to extract the information you need for research, analysis or any other purpose."
