@@ -1,0 +1,223 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[portuguese]{babel}
+\title{Relatório}
+\author{Murillo, Kesley}
+\begin{document}
+
+\tableofcontents
+
+\section{Introdução}
+\subsection{Motivações}
+
+A identificação precisa e confiável de indivíduos é fundamental para garantir o acesso a serviços básicos, como saúde e assistência social, especialmente em países mais pobres. Essa identificação é crucial para garantir que as crianças tenham acesso a vacinas e alimentação adequada, e para evitar fraudes na distribuição de recursos. Além disso, a identificação precisa e confiável é necessária para garantir que as crianças recém-nascidas sejam entregues às suas famílias corretas e para localizar crianças desaparecidas.
+
+Infelizmente, a falta de um sistema de tal método de identificação é um problema crítico em países mais pobres. De acordo com a World Food Programme (WFP), mais de 6 milhões de crianças morrem por doenças preveníveis por vacinas e há diversas fraudes na distribuição de alimentos para comunidades necessitadas. Além disso, ainda há trocas acidentais de crianças recém-nascidas em hospitais e diversas crianças desaparecidas.
+
+Neste contexto, a identificação precisa e confiável dos indivíduos pode ser alcançada através da utilização de digital de recém-nascidos como ferramenta de identificação. A digital é uma característica biometrica única e consistente ao longo da vida de uma pessoa e é relativamente fácil de coletar e processar. No entanto, existem desafios na utilização de digitais de recém-nascidos, devido à sua variabilidade e mudanças ao longo do tempo.
+
+\subsection{Objetivo}
+O objetivo principal deste trabalho é investigar a possibilidade de identificação de recém-nascidos através de suas digitais no futuro. Para isso, será realizada uma revisão bibliográfica sobre os métodos e modelos atuais de processamento e comparação de digitais, além de investigar o estado da arte em processamento
+
+\subsection{Escopo}
+O escopo deste trabalho inclui a investigação sobre a possibilidade de matching temporal de digitais de recém-nascidos. Isso envolve a revisão bibliográfica sobre os métodos e modelos atuais de processamento e comparação de digitais, além de investigar o estado da arte em processamento de digitais de recém-nascidos. O trabalho também incluirá uma análise sobre a escala evolutiva da digital de recém-nascidos, investigando se é possível relacionar a digital de um recém-nascido com a digital deste quando adulto. Além disso, serão investigados métodos de validação para modelos de evolução da digital.
+
+\subsection{Contra-Escopo}
+Não foi desenvolvido/elaborado nenhum modelo de inteligência artificial para processamento de imagens de digitais, assim como para predição de escala evolutiva da mesma.
+\subsection{Riscos}
+Ausência de referências bibliográficas relevantes para o desenvolvimento da poc em tempo hábil, uma vez que pesquisas acerca do estado da arte na área de tecnologia pode não ser simples.
+
+\section{Desenvolvimento}
+\subsection{Artigos recomendados pela empresa}
+O primeiro passo foi realizar uma leitura do trabalho \cite{JainPoster}: "Infant-ID: Fingerprint Recognition", por Anil K. Jain. Neste trabalho, o autor descreve as principais motivações para a pesquisa acerca do estudo de digitais de recém-nascidos, citadas ao longo do texto na introdução. Além disso, ele descreve alguns dos principais desafios nesta área.
+
+Em um breve resumo, este texto fornece uma ótima introdução ao tópico, uma vez que é breve e não faz o uso de conceitos técnicos avançados, facilitando assim, o entendimento geral do problema.
+
+O passo seguinte foi analisar o artigo \cite{Preciozzi} "Fingerprint Biometrics From Newborn to Adult: A
+Study From a National Identity Database System", também recomendado pela empresa. Neste trabalho, os autores analisam o uso de digitais de crianças para descobrir se essa característica biométrica pode ser utilizada para identificação.
+
+Existem duas principais perguntas que os autores fazem e tentam responder. São elas:
+
+\begin{enumerate}
+	\item Com o hardware e software atual, a partir de que idade as digitais podem ser usadas para identificação?
+	
+	\item Com o hardware e software padrão, qual a acurácia na comparação de digitais entre uma criança de 5 anos de idade com a mesma criança 10 anos depois?
+\end{enumerate}
+
+Para a primeira pergunta, Os autores mostraram que, após aplicar um método de interpolação de fator de crescimento em imagens de impressão digital de crianças, a qualidade melhora. Para crianças de cinco anos, a qualidade obtida após o pré-processamento é melhor do que a obtida para impressões digitais de adultos (48,56 vs 45,98), e mesmo a qualidade obtida para crianças com dois anos ou mais é comparável (42,83). Os autores também mostraram que essa interpolação é necessária: as impressões digitais menores em seu tamanho original obtêm qualidade muito baixa, como mostra a figura \ref{quality-table}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{"../img/Screenshot from 2023-01-23 12-10-00"}
+	\caption{Tabela 6 do artigo \cite{Preciozzi}: Qualidade dos dados antes e depois do pré-processamento, agrupado por idade.}
+	\label{quality-table}
+\end{figure}
+
+Usando este abordagem, a precisão obtida no processo de correspondência para impressões digitais de cinco anos já é boa: uma TAR de 92,64\% comparada com uma TAR de 98,39\% para adultos, em ambos os casos com uma FAR de 0,1\%. Além disso, quando se consideram duas impressões digitais para o caso de cinco anos, o resultado é basicamente o mesmo obtido ao analisar uma impressão digital de adulto: 98,33\% e 98,39\%, respectivamente.
+
+Mesmo no caso de imagens obtidas de crianças de um ano, a TAR obtida (62,3\%) para uma FAR de 0,1\% ainda é relevante. De fato, se considerarmos uma técnica de fusão para duas impressões digitais, a TAR resultante salta para 81,42\%. Embora esses resultados não sejam comparáveis aos obtidos para adultos, a precisão obtida pode ser relevante para situações práticas. É necessário mais pesquisa para confirmar se, usando mais impressões digitais, é possível obter precisão semelhante à de adultos.
+
+Já na segunda pergunta, os autores mostraram que a precisão obtida ao comparar impressões digitais de crianças de 5 anos com as obtidas 10 anos depois (de crianças com 15 anos ou mais) é semelhante à obtida ao comparar impressões digitais de adultos: para uma taxa de falsos positivos fixa de 0,1\%, a taxa de acerto verdadeiro obtida foi de 97,9\%, muito semelhante à de 98,39\% obtida para adultos.
+
+Em futuros trabalhos, os autores desejam se concentrar na faixa etária mais jovem: de recém-nascidos a um ano de idade. Como uma das principais limitações nesse caso é a baixa qualidade das imagens adquiridas, eles estão preparando uma campanha com escaneres de alta resolução. Experimentos preliminares com um protótipo de 2000 dpi mostram resultados promissores. Além disso, eles querem fazer mais pesquisas sobre um modelo de envelhecimento mais avançado para dedos, o que pode melhorar ainda mais o desempenho dos sistemas.
+
+\subsection{Artigos encontrados na literatura}
+Além dos artigos recomendados pela empresa, utilizamos plataformas de buscas online, como por exemplo, Google Scholar e o ArXiV, afim de encontrar trabalhos com assuntos semelhantes para continuar a pesquisa. O Google Scholar trouxe os melhores resultados após uma busca exaustiva com palavras chaves Newborn, Longitudinal e Fingerprint, principalmente. Os artigos julgados mais relevantes foram armazenados em três categorias: Main, Related e Background.
+
+Os artigos na categoria ``Main'' foram aqueles que estão intimamente relacionados ao estudo da evolução temporal na digitais e que contêm dados relacionados a crianças em geral. Os artigos na categoria "Related" são aqueles que contêm estudos sobre evolução temporal de digitais, mas que não são exclusivamente (ou majoritariamente) sobre crianças, isto é, possuem um dataset bastante focado em adultos. Por fim, os artigos na categoria "Background" são aqueles que lidam com técnicas para identificação de digitais em geral, sem estudar de maneira relevante a evolução temporal. Estes artigos não serão listados a seguir e possuem como principal objetivo servirem de auxílio para conceitos mais básicos como, por exemplo, cálculo de distância entre vales numa digital, mapeamento de minúcias e etc.
+
+\subsubsection{Main}
+Dentro da categoria "Main", temos, primeiramente, o artigo \cite{Galbally}: "A Study of Age and Ageing in Fingerprint Biometrics", por Javier Galbally, Rudolf Haraksim, e Laurent Beslay.
+
+Neste artigo, os autores estão interessados em estudar como a idade e o envelhecimento de um indivíduo pode afetar a sua digital como característica biométrica para identificação.
+
+Este trabalho utilizou um dataset fornecido pelas autoridades portuguesas com medidas de segurança e proteção de dados. O banco de dados contém impressões digitais de 265,321 dedos diferentes, totalizando 421,388 imagens. Estes dados podem ser divididos em três grupos principais de acordo com a idade dos dedos no momento da primeira aquisição: crianças (idades 0-17), adultos (idades 18-25) e idosos (idades 65-98). O dataset não contém impressões digitais na faixa de idade 26-64. A distribuição de idades para pessoas até 20 anos no dataset está representada na figura \ref{fig:idade}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.45\linewidth]{../img/idade}
+	\caption{Tabela 1 do artigo \cite{Preciozzi}: Distribuição do número de digitais por idade no dataset em questão.}
+	\label{fig:idade}
+\end{figure}
+
+Os autores do estudo encontraram que a qualidade das impressões digitais e os resultados de correspondência genuína aumentam rapidamente entre 0 e 12 anos de idade, onde se estabilizam. Além disso, foi observado que o envelhecimento ocorre para todas as faixas etárias e quanto maior a diferença de tempo entre as amostras de referência e de verificação, maior é a perda de desempenho de correspondência genuína. Este efeito é mais pronunciado em crianças cuja amostra de impressão digital de referência foi registrada entre 0 e 12 anos. Para essa faixa etária, com uma diferença de tempo de 7 anos, os resultados de correspondência genuína diminuem em cerca de 50\%. Os autores sugerem que novos algoritmos de qualidade e extração de características possam ser desenvolvidos especificamente adaptados para o tamanho pequeno dessas impressões digitais e para suas linhas finas e vales estreitos, além disso, o desenvolvimento de um modelo de crescimento confiável para o deslocamento de minúcias ao longo da infância poderia ser uma ferramenta poderosa para combater o efeito de envelhecimento.
+
+O segundo artigo na categorial "Main" \cite{longitudinal}, possui o título "Longitudinal study of fingerprint recognition". Neste artigo, os autores utilizam um dataset de 15.597 digitais de indivíduos apreendidos pela polícia do estado de Michigan (MSP). Os dados consistem de cinco ou mais digitais coletadas ao longo de um intervalo de tempo que varia de 5 a 12 anos para cada indivíduo. O indivíduo mais jovem possui idade de 8 anos na primeira ocorrência.
+
+O dataset usado neste artigo pode ser obtido para pesquisadores interessados no assunto, sob acordo de sigilo apropriado ditado pela Polícia do Estado de Michigan.
+
+Neste trabalho, os autores concluem que a acurácia na comparação entre duas digitais tende a diminuir à medida que o intervalo de tempo entre elas. Além disso, esta acurácia também tende a diminuir à medida que a idade do indivíduo aumenta ou quando a qualidade da imagem da digital diminui.
+
+Os autores encontraram que a tendência de queda na acurácia com o tempo é real, mas a probabilidade de aceitação verdadeira ainda é alta, mesmo quando o intervalo de tempo entre as digitais comparadas é grande. Eles também descobriram que a qualidade da imagem da digital é mais importante do que o intervalo de tempo ou a idade do indivíduo para a precisão da correspondência genuína. No entanto, as diferenças na acurácia de correspondência impostora são negligenciáveis. Os autores também notam que a interação entre o intervalo de tempo e a qualidade da imagem da digital, bem como a interação entre a idade do indivíduo e a qualidade da imagem da digital, não são significativos.
+
+O terceiro artigo \cite{pre-infant-id} possui o título "Fingerprint Recognition of Young Children". O dataset utilizado foi aprovado pelo Institutional Review Board (IRB) da Michigan State University and ethics committee of Dayalbagh Educational Institute and Saran Ashram Hospital, coletado neste hospital. O dataset não pôde ser disponibilizado publicamente devido ao regulamento da IRB e consentimento parental.
+
+We are grateful to Prem S. Sudhish, Dayalbagh Educational Institute, Dayalbagh, India for his help in organizing the data collection, and the hospital administration, Saran Ashram hospital, Dayalbagh for permitting us to use Dr. Bhatanagar’s office for data collection.
+
+For the first time ever, we demonstrate the
+successful capture of fingerprints of a child as young as 6 hours
+old using a custom 1,270 ppi fingerprint reader. Empirical
+evaluation conducted on the captured fingerprint data using a
+state-of-the-art AFIS shows that 500 ppi fingerprints suffice for
+recognizing children at least 12 months of age (TAR = 99.5\%
+at FAR = 0.1\%), while 1,270 ppi fingerprints are required to
+recognize children that are 6 months or older (TAR = 98.9\% at
+FAR = 0.1\%). Statistical analysis with mixed-effects models
+shows that (i) the age at enrolment has a larger effect on
+genuine scores generated by the AFIS than the time lapse
+between enrolment and query images, and (ii) the genuine
+similarity scores do not significantly decrease due to the 6-
+12 months time lapse. These results demonstrate the potential
+of fingerprint recognition as a feasible solution for child
+identification in applications such as vaccination tracking,
+improving child nutrition, national identification programs, and
+the emerging interest in identity for lifetime.
+
+O quarto artigo \cite{infant-prints} é uma continuação do estudo anterior utilizando o mesmo dataset. Desse modo, pela mesma razão, o dataset não pode ser disponibilizado publicamente.
+
+Neste trabalho, os autores
+
+O quinto artigo \cite{infant-id}, "Infant-ID: Fingerprints for Global Good" e utiliza o mesmo dataset do artigo anterior.
+
+Neste trabalho, os autores mostraram que digitais de crianças de 2 meses de idade podem ser usadas para reconhecê-las após passado um ano inteiro da primeira coleta. De acordo com os próprios autores, essa foi a primeira vez (até a data pertinente do artigo) que um estudo consegue mostrar um resultado positivo para identificação de crianças tão jovens como 2 meses de idade, após esse intervalo de tempo.
+
+
+\subsubsection{Related}
+
+Primeiro: "The PLUS Multi-Sensor and Longitudinal
+Fingerprint Dataset: An Initial Quality and
+Performance Evaluation"
+
+This work presents a multi-sensor and longitudinal FP dataset
+together with an initial analysis of quality and recognition per-
+formance. The dataset consists of around 108,000 samples ac-
+quired from 50 volunteers at four time-separated sessions over
+two years using 10 commercial off-the-shelf capturing devices,
+including 5 optical, 4 capacitive and 1 thermal one. The dataset
+is available for research purposes and can be downloaded at:
+http://wavelab.at/sources/PLUS-MSL-FP.
+
+Segundo:
+Modeling the Growth of Fingerprints Improves
+Matching for Adolescents
+
+Bundeskriminalamt, BKA) provided fingerprints of juveniles that
+have been checked out in Criminal Records between 2 and 48 (median
+4.5) times. At their first check-out (CO), the subjects under study
+were 6–15 (median 12) years old, at the last CO 17–34 (median 25)
+years old; the 48 persons (35 male, 13 female) considered were born
+in 1972–1986. The longitudinal data included information on birth
+date, sex, and date of CO such that age at CO could be determined.
+At each CO, a nail-to-nail rolled fingerprint was taken, as well as an
+additional plain control. The rolled imprint was used if not otherwise
+noted; the plain imprint is called control wherever it was utilized. The
+images used are scans of inked fingerprints on sheets of paper. Image
+resolution was 500 DPI.
+
+Summarizing these results, the analysis of growth effects on finger-
+prints clearly showed growth to result chiey in an isotropic rescaling
+
+
+Terceiro Artigo "Characterization of Biometric Template Aging
+in a Multiyear, Multivendor Longitudi"
+
+Também possui um dataset, mas com adolesscentes e adultos.
+
+\subsubsection{Background}
+Além desses, outros artigos coletados sobre assuntos mais genéricos contendo backgrounds relevantes são \cite{handbook-biometrics, two, three, four, five}.
+
+\section{Considerações Finais}
+\subsection{Resultados}
+\subsection{Ações de Continuidade}
+Uma vez que esse efeito de envelhecimento acontece em todos os grupos de idades, apesar de menos em adultos. Nesse caso, talvez possamos trabalhar com esse dataset para análisar as digitais de adultos como um possível toymodel antes de tentar algo com de recém nascidos?
+
+Aparentemente a falta de um conjunto de dados preciso se mostrou um problema bastante grave na linha de pesquisa sobre o assunto. Deste modo, durante essa primeira sprint não trouxemos algum resultado relevante para a literatura. Mesmo assim, a revisão bibliográfica nos permitiu enxergar como se encontra o estado da arte no estudo de evolução temporal de digitais de recém-nascidos e, nos próximos passos, poderemos procurar alternativas para solução deste problema com mais afinco.
+
+\begin{thebibliography}{1}
+	
+	\bibitem{JainPoster}
+	Jain, Anil K. \emph{Infant-ID: Fingerprint Recognition}, Michigan State University - Poster
+	
+	\bibitem{Preciozzi}
+	Preciozzi, Javier, et al. \emph{Fingerprint biometrics from newborn to adult: A study from a national identity database system}. IEEE Transactions on Biometrics, Behavior, and Identity Science 2.1 (2020): 68-79.
+	
+	\bibitem{Galbally}
+	Galbally, Javier, Rudolf Haraksim, and Laurent Beslay. \emph{A study of age and ageing in fingerprint biometrics}. IEEE Transactions on Information Forensics and Security 14.5 (2018): 1351-1365.
+	
+	\bibitem{longitudinal}
+	Yoon, Soweon, and Anil K. Jain. \emph{Longitudinal study of fingerprint recognition}. Proceedings of the National Academy of Sciences 112.28 (2015): 8555-8560.
+	
+	\bibitem{pre-infant-id}
+	Jain, Anil K., et al. \emph{Fingerprint recognition of young children} IEEE Transactions on Information Forensics and Security 12.7 (2016): 1501-1514.
+	
+	\bibitem{infant-prints}
+	J Engelsma, Joshua, et al. \emph{Infant-prints: Fingerprints for reducing infant mortality}. Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition Workshops. 2019.
+	
+	\bibitem{infant-id}
+	Engelsma, Joshua James, et al. \emph{Infant-id: Fingerprints for global good}. IEEE Transactions on Pattern Analysis and Machine Intelligence (2021).
+	
+	% Background
+	
+	\bibitem{handbook-biometrics}
+	Jain, Anil K., Patrick Flynn, and Arun A. Ross, eds. Handbook of biometrics. Springer Science \& Business Media, 2007.
+	
+	\bibitem{two}
+	Cao, Kai, and Anil K. Jain. \emph{Fingerprint indexing and matching: An integrated approach}. 2017 IEEE International Joint Conference on Biometrics (IJCB). IEEE, 2017.
+	
+	\bibitem{three}
+	Shabil, Mohammed, and Drhs Fadewar. \emph{Fingerprint Recognition of Newborns Baby: A Review}.
+	
+	\bibitem{four}
+	Raja, K. B. \emph{Fingerprint recognition using minutia score matching}. arXiv preprint arXiv:1001.4186 (2010).
+	
+	\bibitem{five}
+	Yin, Yilong, Jie Tian, and Xiukun Yang. \emph{Ridge distance estimation in fingerprint images: algorithm and performance evaluation}. EURASIP Journal on Advances in Signal Processing 2004.4 (2004): 1-8.
+	
+\end{thebibliography}
+
+\end{document}
+
