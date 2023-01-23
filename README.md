@@ -5,5 +5,7 @@
 ## Goals
 
 - Study and implement state-of-the-art algorithms for text and information extraction from PDF files, including images, tables, charts, and other elements.
+  - https://pypdf2.readthedocs.io/en/latest/user/extract-text.html
 - Create an API or utilize existing API such as ChatGPT for easy integration with other systems.
+  - https://beta.openai.com/overview
 - Design and deploy a user-friendly interface for easy access and usage by researchers, analysts, and other users.
