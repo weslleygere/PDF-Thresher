@@ -9,6 +9,7 @@
   - https://github.com/JonathanLink/PDFLayoutTextStripper
   - https://machinelearningmastery.com/clean-text-machine-learning-python/
   - https://medium.com/social-impact-analytics/extract-text-from-unsearchable-pdfs-for-data-analysis-using-python-a6a2ca0866dd
+  - https://www.section.io/engineering-education/extract-text-from-images-using-pytesseract/
 - Create an API or utilize existing API such as ChatGPT for easy integration with other systems.
   - https://beta.openai.com/overview
 - Design and deploy a user-friendly interface for easy access and usage by researchers, analysts, and other users.
